@@ -5,7 +5,7 @@ import random
 
 os.mkdir("./Output")
 res = conf.RESOLUTION
-color = (255, 255, 255, 0)
+color = (255, 255, 255)
 output_dir = "./Output/"
 
 layers = sorted(os.listdir("./Layers"))
@@ -14,11 +14,10 @@ layer_amount = len(layers)
 def naming(index):
     return conf.PROJECT_NAME + "#" +  str(index) + ".png"
 
-img = Image.new("RGBA", res , color)
+img = Image.new("RGB", res , color)
 for a in range(0, conf.ASSETS):
     for i in layers:
         y = os.listdir("./Layers/" + i)
-        print(i)
         selection = random.randint(0, len(y)-1)
         trait_location = "./Layers/" + i + "/" + y[selection]
         trait_location = Image.open(trait_location)
