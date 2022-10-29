@@ -5,14 +5,14 @@ import random
 
 #os.mkdir("./Output")
 res = conf.RESOLUTION
-color = (255,55,105, 255)
+color = (255, 255, 255, 0)
 output_dir = "./Output/"
 
 layers = os.listdir("./Layers")
 layer_amount = len(layers)
 
 def naming(index):
-    return conf.PROJECT_NAME + str(index) + ".png"
+    return conf.PROJECT_NAME + "#" +  str(index) + ".png"
 
 img = Image.new("RGBA", res , color)
 for a in range(0, conf.ASSETS):
