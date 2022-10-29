@@ -3,7 +3,12 @@ from PIL import Image
 import conf
 import random
 
+
 os.mkdir("./Output")
+if conf.STARTS_FROM_ZERO:
+    start = 0
+else:
+    start = 1
 res = conf.RESOLUTION
 color = (255, 255, 255)
 output_dir = "./Output/"
@@ -12,10 +17,15 @@ layers = sorted(os.listdir("./Layers"))
 layer_amount = len(layers)
 
 def naming(index):
-    return conf.PROJECT_NAME + "#" +  str(index) + ".png"
+    if conf.FIXED_DECIMALS != 0:
+        zeros = (conf.FIXED_DECIMALS - len(str(index))) * "0"
+        name = zeros + str(index)
+        return conf.PROJECT_NAME + "#" +  name + ".png"
+    else:
+        return conf.PROJECT_NAME + "#" +  str(index) + ".png"
 
 img = Image.new("RGB", res , color)
-for a in range(0, conf.ASSETS):
+for a in range(start, conf.ASSETS):
     for i in layers:
         y = os.listdir("./Layers/" + i)
         selection = random.randint(0, len(y)-1)
