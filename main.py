@@ -3,7 +3,7 @@ from PIL import Image
 import conf
 import random
 
-#os.mkdir("./Output")
+os.mkdir("./Output")
 res = conf.RESOLUTION
 color = (255, 255, 255, 0)
 output_dir = "./Output/"
