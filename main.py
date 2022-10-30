@@ -2,6 +2,7 @@ import os
 from PIL import Image
 import conf
 import random
+from rarities import rarities, check_rarity
 
 
 os.mkdir("./Output")
@@ -24,12 +25,19 @@ def naming(index):
     else:
         return conf.PROJECT_NAME + "#" +  str(index) + ".png"
 
+trait_list = []
 img = Image.new("RGB", res , color)
 for a in range(start, conf.ASSETS):
     for i in layers:
         y = os.listdir("./Layers/" + i)
         selection = random.randint(0, len(y)-1)
         trait_location = "./Layers/" + i + "/" + y[selection]
+        try:
+            val = rarities.get(trait_location)
+            check_rarity(conf.ASSETS, trait_location, val, trait_list)
+        except:
+            pass
+        trait_list.append(trait_location)
         trait_location = Image.open(trait_location)
         img.paste(trait_location, (0,0), mask=trait_location )
         #print("Selected", y[selection], "from", i)
