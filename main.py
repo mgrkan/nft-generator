@@ -26,20 +26,30 @@ def naming(index):
         return conf.PROJECT_NAME + "#" +  str(index) + ".png"
 
 trait_list = []
+exceeds_rarity = conf.LAYERS
+print(exceeds_rarity)
 img = Image.new("RGB", res , color)
-for a in range(start, conf.ASSETS):
+global a
+a = start
+while a <= conf.ASSETS:
     for i in layers:
         y = os.listdir("./Layers/" + i)
-        selection = random.randint(0, len(y)-1)
-        trait_location = "./Layers/" + i + "/" + y[selection]
+        selection = random.choice(y) #Rarityi aşanları ayrı listeye ekle sonra o listedekilerden farklı gelene dek random seçtir veya bu fordan başla random farklı sonuç vermeyebilir
+        trait_location = "./Layers/" + i + "/" + selection
+        trait_list.append(trait_location)
         try:
             val = rarities.get(trait_location)
-            check_rarity(conf.ASSETS, trait_location, val, trait_list)
+            amount = check_rarity(conf.ASSETS, trait_location, val, trait_list, a)
+            print(trait_location,"rarity:", val,"amount:", amount)
+            if amount >= trait_list.count(trait_location):
+                exceeds_rarity[int(i)].append(trait_location)
+                print("exceeded rarity")
+                print(exceeds_rarity)
         except:
             pass
-        trait_list.append(trait_location)
         trait_location = Image.open(trait_location)
-        img.paste(trait_location, (0,0), mask=trait_location )
-        #print("Selected", y[selection], "from", i)
+        #img.paste(trait_location, (0,0), mask=trait_location )
             
-    img.save(os.path.join(output_dir, naming(a)))
+    #img.save(os.path.join(output_dir, naming(a)))
+    print(naming(a))
+    a += 1
