@@ -40,13 +40,13 @@ while a <= conf.ASSETS:
             val = rarities.get(trait_location)
             amount = check_rarity(conf.ASSETS, trait_location, val, trait_list, a)
             print(trait_location,"rarity:", val,"amount:", amount)
-            if amount >= trait_list.count(trait_location):
+            if amount <= trait_list.count(trait_location):
                 exceeds_rarity[int(i)].append(trait_location)
                 print("exceeded rarity")
                 print(exceeds_rarity)
                 y.remove(selection)
                 new_selection = random.choice(y)
-                trait_location = "./Layers/" + i + "/" + selection
+                trait_location = "./Layers/" + i + "/" + new_selection
 
         except:
             pass
