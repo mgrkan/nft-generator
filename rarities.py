@@ -1,5 +1,5 @@
 rarities = {
-    "./Layers/0/0.png" : 10
+    "./Layers/1/0.png" : 10
 } #Traits and rarity percents %, you don't need to set every trait
 #0-100 - 100 means the trait can exist in all assets, 0 means it can't exist in any
 

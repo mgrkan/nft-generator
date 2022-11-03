@@ -36,7 +36,6 @@ while a <= conf.ASSETS:
         y = os.listdir("./Layers/" + i)
         selection = random.choice(y) #Rarityi aşanları ayrı listeye ekle sonra o listedekilerden farklı gelene dek random seçtir veya bu fordan başla random farklı sonuç vermeyebilir
         trait_location = "./Layers/" + i + "/" + selection
-        trait_list.append(trait_location)
         try:
             val = rarities.get(trait_location)
             amount = check_rarity(conf.ASSETS, trait_location, val, trait_list, a)
@@ -45,11 +44,17 @@ while a <= conf.ASSETS:
                 exceeds_rarity[int(i)].append(trait_location)
                 print("exceeded rarity")
                 print(exceeds_rarity)
+                y.remove(selection)
+                new_selection = random.choice(y)
+                trait_location = "./Layers/" + i + "/" + selection
+
         except:
             pass
+
+        trait_list.append(trait_location)
         trait_location = Image.open(trait_location)
-        #img.paste(trait_location, (0,0), mask=trait_location )
+        img.paste(trait_location, (0,0), mask=trait_location )
             
-    #img.save(os.path.join(output_dir, naming(a)))
+    img.save(os.path.join(output_dir, naming(a)))
     print(naming(a))
     a += 1
