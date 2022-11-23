@@ -34,7 +34,7 @@ a = start
 while a <= conf.ASSETS:
     for i in layers:
         y = os.listdir("./Layers/" + i)
-        selection = random.choice(y) #Rarityi aşanları ayrı listeye ekle sonra o listedekilerden farklı gelene dek random seçtir veya bu fordan başla random farklı sonuç vermeyebilir
+        selection = random.choice(y)
         trait_location = "./Layers/" + i + "/" + selection
         try:
             val = rarities.get(trait_location)
