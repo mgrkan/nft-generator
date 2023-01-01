@@ -21,9 +21,9 @@ def naming(index):
     if conf.FIXED_DECIMALS != 0:
         zeros = (conf.FIXED_DECIMALS - len(str(index))) * "0"
         name = zeros + str(index)
-        return conf.PROJECT_NAME + "#" +  name + ".png"
+        return conf.PROJECT_NAME + "#" +  name + ".jpeg"
     else:
-        return conf.PROJECT_NAME + "#" +  str(index) + ".png"
+        return conf.PROJECT_NAME + "#" +  str(index) + ".jpeg"
 
 trait_list = []
 exceeds_rarity = conf.LAYERS
