@@ -23,7 +23,7 @@ exceptions = [
     {(7,10) : [[(6,0)], True]},
     {(7,11) : [[(6,0)], True]},
     {(7,14) : [[(6,0)], True]},
-    {(7,8) : [[(5,5), (5,16), (5,8)], False]}
+    {(7,8) : [[(5,5), (5,16), (5,8), (5,1), (5,6)], False]}
 
 ]
 
@@ -65,7 +65,6 @@ def check_exception(exceptions, traits):
             for i in value:
                 fi = "./Layers/" + str(i[0]) + "/"
                 for f in os.listdir(fi):
-                    print(new_value)
                     new_value.append((i[0], int(f.replace(".png", ""))))
                     new_value = [i for i in set(new_value) - set(value)]
             exceptions[a] = {key: [new_value, False]}
@@ -95,15 +94,12 @@ def check_exception(exceptions, traits):
                     unique_layers = [b]
                 compatibles = []
                 
-                print(unique_layers)
                 for y in unique_layers:
                     all_traits = []
                     [all_traits.append((y, int(lay.replace(".png", "")))) for lay in os.listdir("./Layers/" + str(y))]
-                    print(all_traits, value)
                     compatibles.append(list(set(all_traits) - set(value)))
                         
-                    
-                print(compatibles, traits)
+
                 for j in compatibles:
                     selection = random.choice(j)
                     print(selection)
