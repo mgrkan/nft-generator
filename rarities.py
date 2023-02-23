@@ -2,15 +2,29 @@ import os
 import random
 
 rarities = {
-
+    "./Layers/6/7.png" : 0
 } #Traits and rarity percents %, you don't need to set every trait
 #0-100 - 100 means the trait can exist in all assets, 0 means it can't exist in any
 
 exceptions = [ 
 #if this is one of the traits:(layer,image) : then [[multiple traits], bool] if bool is true
-#include only given traits, if false dont include given traits
-    {(2,8) : [[(4,10)], True]},
-    {(1,11) : [[(3,1), (3,2), (3,3)], False]}
+#include the only given trait, if false dont include given trait(s)
+    {(2,8) : [ [ (4,10) ], True] },
+    {(1,11) : [ [(3,1), (3,2), (3,3)], False] },
+    {(7,6) : [ [ (6,0) ], True] },
+    {(7,6) : [[(5,8)], False]},
+    {(7,9) : [[(5,8)], False]},
+    {(7,10) : [[(5,8)], False]},
+    {(7,13) : [[(5,8)], False]},
+    {(6,11) : [[(7,12), (7,7), (7,13)], True]},
+    {(6,12) : [[(7,12), (7,7), (7,13)], True]},
+    {(6,2) : [[(7,15)], False]},
+    {(1,12) : [[(3,4)], False]},
+    {(7,10) : [[(6,0)], True]},
+    {(7,11) : [[(6,0)], True]},
+    {(7,14) : [[(6,0)], True]},
+    {(7,8) : [[(5,5), (5,16), (5,8)], False]}
+
 ]
 
 
@@ -50,12 +64,10 @@ def check_exception(exceptions, traits):
         if compatibility == True:
             for i in value:
                 fi = "./Layers/" + str(i[0]) + "/"
-                for x in os.listdir(fi):
-                    if x != str(i[1]) + ".png":
-                        x = x.replace(".png", "")
-                        x = int(x)
-                        x = (i[0], x)
-                        new_value.append(x)
+                for f in os.listdir(fi):
+                    print(new_value)
+                    new_value.append((i[0], int(f.replace(".png", ""))))
+                    new_value = [i for i in set(new_value) - set(value)]
             exceptions[a] = {key: [new_value, False]}
         a += 1
     
@@ -82,10 +94,12 @@ def check_exception(exceptions, traits):
                 if unique_layers == []:
                     unique_layers = [b]
                 compatibles = []
-                    
+                
+                print(unique_layers)
                 for y in unique_layers:
                     all_traits = []
                     [all_traits.append((y, int(lay.replace(".png", "")))) for lay in os.listdir("./Layers/" + str(y))]
+                    print(all_traits, value)
                     compatibles.append(list(set(all_traits) - set(value)))
                         
                     
