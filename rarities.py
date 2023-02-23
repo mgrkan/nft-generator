@@ -2,13 +2,13 @@ import os
 import random
 
 rarities = {
-    "./Layers/0/6.png" : 0,
-    "./Layers/5/7.png" : 0,
-    "./Layers/6/4.png" : 0
+
 } #Traits and rarity percents %, you don't need to set every trait
 #0-100 - 100 means the trait can exist in all assets, 0 means it can't exist in any
 
-exceptions = [
+exceptions = [ 
+#if this is one of the traits:(layer,image) : then [[multiple traits], bool] if bool is true
+#include only given traits, if false dont include given traits
     {(2,8) : [[(4,10)], True]},
     {(1,11) : [[(3,1), (3,2), (3,3)], False]}
 ]
