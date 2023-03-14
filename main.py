@@ -14,6 +14,7 @@ else:
 res = conf.RESOLUTION
 color = (255, 255, 255)
 output_dir = "./Output/"
+ext = conf.EXTENSION
 
 layers = sorted(os.listdir("./Layers"))
 layer_amount = len(layers)
@@ -22,9 +23,9 @@ def naming(index):
     if conf.FIXED_DECIMALS != 0:
         zeros = (conf.FIXED_DECIMALS - len(str(index))) * "0"
         name = zeros + str(index)
-        return conf.PROJECT_NAME + "#" +  name + ".png"
+        return conf.PROJECT_NAME + "#" +  name + ext
     else:
-        return conf.PROJECT_NAME + "#" +  str(index) + ".png"
+        return conf.PROJECT_NAME + "#" +  str(index) + ext
 
 
 trait_check = []
@@ -49,10 +50,13 @@ while a <= conf.ASSETS:
     #checking for incompatible traits
     check_exception(exceptions, traits)
     restack(traits, img, Image)
-    trait_list[naming(a).replace(".jpeg", "")] = traits
-    img.save(os.path.join(output_dir, naming(a)))
-    print(naming(a))
-    a += 1
+    if (unique(trait_list, traits)):
+        trait_list[naming(a).replace(ext, "")] = traits
+        img.save(os.path.join(output_dir, naming(a)))
+        print(naming(a))
+        a += 1
+    else:
+        print("image not unique. recreating")
 
 with open("traits.json", "w") as f:
     f.write(json.dumps(trait_list))

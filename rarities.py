@@ -27,6 +27,11 @@ exceptions = [
 
 ]
 
+def unique(trait_list, traits):
+    if traits in trait_list.values():
+        return False
+    else: return True
+
 
 def check_rarity(total_assets, trait_location, trait_check, traits, selection, y, exceeds_rarity, i):
     try:
