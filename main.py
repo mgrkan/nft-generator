@@ -47,9 +47,7 @@ while a <= conf.ASSETS:
         #pasting the trait on top of the image
         trait_location = Image.open(trait_location)
         img.paste(trait_location, (0,0), mask=trait_location )
-    #checking for incompatible traits
-    check_exception(exceptions, traits)
-    restack(traits, img, Image)
+        
     if (unique(trait_list, traits)):
         trait_list[naming(a).replace(ext, "")] = traits
         img.save(os.path.join(output_dir, naming(a)))
