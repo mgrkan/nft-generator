@@ -45,7 +45,7 @@ while a <= conf.ASSETS:
         #checking if the trait exceeds rarity
         check_rarity(conf.ASSETS, trait_location, trait_check, traits, selection, y, exceeds_rarity, i)
         #pasting the trait on top of the image
-        trait_location = Image.open(trait_location)
+        trait_location = Image.open(trait_location).convert("RGBA")
         img.paste(trait_location, (0,0), mask=trait_location )
         
     if (unique(trait_list, traits)):
